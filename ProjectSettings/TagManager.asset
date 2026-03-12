@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Door
   - Keycard
+  - Wall
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -17,13 +17,13 @@ public class PathfindingCells : MonoBehaviour
     public Tilemap groundMap;
     public Tilemap WallMap;
 
-    private bool pathsGenerated;
+    public bool pathsGenerated;
 
     [SerializeField] private Dictionary<Vector2, Cell> cells;
 
-    [SerializeField]  private List<Vector2> cellsToSearch;
-    [SerializeField]  private List<Vector2> searchedCells;
-    [SerializeField]  private List<Vector2> finalPath;
+    [SerializeField]  public List<Vector2> cellsToSearch;
+    [SerializeField] public List<Vector2> searchedCells;
+    [SerializeField]  public List<Vector2> finalPath;
 
     [SerializeField] private int StartPathLocX = 1;
     [SerializeField] private int StartPathLocY = 1;
@@ -35,7 +35,7 @@ public class PathfindingCells : MonoBehaviour
     {
         gridWidth = WallMap.cellBounds.size.x;
         gridHeight = WallMap.cellBounds.size.y;
-        gridOffset = WallMap.cellSize / 2;
+        //gridOffset = WallMap.cellSize / 2;
 
 
         for(int x = 0;  x < WallMap.cellBounds.size.x; x++)
@@ -45,30 +45,25 @@ public class PathfindingCells : MonoBehaviour
                 Vector3Int WallTile = WallMap.WorldToCell(new Vector2(x, y));
                 if(WallMap.HasTile(WallTile))
                 {
-                    Debug.Log(new Vector2(x, y));
+                    //Debug.Log(new Vector2(x, y));
                 }
             }
         }
 
-        if (generatePath && !pathsGenerated)
-        {
-            GenerateGrid();
-            FindPath(new Vector2(StartPathLocX, StartPathLocY), new Vector2(FinalPathLocX, FinalPathLocY));
-            pathsGenerated = true;
-        }
-        else if (!generatePath)
-        {
-            pathsGenerated = false;
-        }
+        GenerateGrid();
     }
 
-    /*
+    
     private void Update()
+    {
+        
+    }
+
+    public void GeneratePath(Vector2 StartPos ,Vector2 Position)
     {
         if (generatePath && !pathsGenerated)
         {
-            GenerateGrid();
-            FindPath(new Vector2(0, 1), new Vector2(FinalPathLocX, FinalPathLocY));
+            FindPath(StartPos, Position);
             pathsGenerated = true;
         }
         else if (!generatePath)
@@ -76,10 +71,29 @@ public class PathfindingCells : MonoBehaviour
             pathsGenerated = false;
         }
     }
-    */
+    
 
     private void GenerateGrid()
     {
+
+        cells = new Dictionary<Vector2, Cell>();
+
+        for (float x = 0; x < gridWidth; x += cellWidth)
+        {
+            for (float y = 0; y < gridHeight; y += cellHeight)
+            {
+                Vector2 pos = new Vector2(x, y) + gridOffset;
+
+                cells.Add(pos, new Cell(pos));
+
+                if (WallMap.HasTile(WallMap.WorldToCell(pos)) == true)
+                {
+                    cells[pos].isWall = true;
+                }
+            }
+        }
+
+        /*
         cells = new Dictionary<Vector2, Cell>();
 
         for (float x = 0; x < gridWidth; x += cellWidth)
@@ -90,18 +104,20 @@ public class PathfindingCells : MonoBehaviour
                 if (!WallMap.HasTile(WallMap.WorldToCell(pos)) == true)
                 {
                     cells.Add(pos, new Cell(pos));
+                    //Debug.Log(cells[x, y]);
                 }
 
-                if (WallMap.HasTile(WallMap.WorldToCell(pos)) == true)
+                else if (WallMap.HasTile(WallMap.WorldToCell(pos)) == true)
                 {
                     cells.Add(pos, new Cell(pos));
                     cells[pos].isWall = true;
                 }
             }
         }
+        */
     }
 
-    private void FindPath(Vector2 startPos, Vector2 endPos)
+    public void FindPath(Vector2 startPos, Vector2 endPos)
     {
         searchedCells = new List<Vector2>();
         cellsToSearch = new List<Vector2> { startPos };
@@ -140,6 +156,7 @@ public class PathfindingCells : MonoBehaviour
                 }
 
                 finalPath.Add(startPos);
+                finalPath.Reverse();
                 return;
             }
 
@@ -154,6 +171,12 @@ public class PathfindingCells : MonoBehaviour
             for (float y = cellPos.y - cellHeight; y <= cellHeight + cellPos.y; y += cellHeight)
             {
                 Vector2 neighborPos = new Vector2(x, y);
+                if(cellPos + new Vector2(cellWidth, cellHeight) - new Vector2(Mathf.Abs(neighborPos.x), Mathf.Abs(neighborPos.y)) == Vector2.zero)
+                {
+                    continue;
+                }
+                Debug.DrawLine(neighborPos, cellPos);
+
                 if (cells.TryGetValue(neighborPos, out Cell c) && !searchedCells.Contains(neighborPos) && !cells[neighborPos].isWall)
                 {
                     int GcostToNeighbour = cells[cellPos].gCost + GetDistance(cellPos, neighborPos);
@@ -189,6 +212,7 @@ public class PathfindingCells : MonoBehaviour
         return lowest * 14 + horizontalMovesRequired * 10;
     }
 
+    
     private void OnDrawGizmos()
     {
         if(!visualiseGrid || cells == null) return;
@@ -212,6 +236,7 @@ public class PathfindingCells : MonoBehaviour
             Gizmos.DrawCube(kvp.Key + (Vector2)transform.position, new Vector3(cellWidth, cellHeight));
         }
     }
+    
 
     private class Cell
     {
