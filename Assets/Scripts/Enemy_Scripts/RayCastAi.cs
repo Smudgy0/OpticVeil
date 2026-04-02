@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using TreeEditor;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -13,6 +15,11 @@ public class RayCastAi : MonoBehaviour
 
     public LayerMask WallLayer;
 
+    public GameObject ThisGameObject;
+    public GameObject[] AllEnemies;
+    public List<GameObject> AllEnemiesList;
+    public RayCastAi CloestEnemy;
+
     public float RaycastDistance;
     public float RayCastConeSize;
 
@@ -20,6 +27,10 @@ public class RayCastAi : MonoBehaviour
     [SerializeField] private bool WallToRight;
     [SerializeField] private bool WallToTop;
     [SerializeField] private bool WallToBot;
+
+    [SerializeField] private bool EnemyInFront;
+    [SerializeField] private float EnemyDistanceDetection;
+    [SerializeField] private bool HasRotatedAway = false;
 
     [SerializeField] private bool TempDirectionChosen;
 
@@ -56,10 +67,18 @@ public class RayCastAi : MonoBehaviour
 
     private void Awake()
     {
-
+        ThisGameObject = this.gameObject;
         PlayerLoc = FindAnyObjectByType<Player_Movement>();
         RB = GetComponent<Rigidbody2D>();
         this.gameObject.transform.rotation = UnityEngine.Random.rotation;
+        AllEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for(int i = 0; i < AllEnemies.Length; i++)
+        {
+            AllEnemiesList.Add(AllEnemies[i]);
+            if (AllEnemies[i].gameObject == this.gameObject) { AllEnemiesList.Remove(AllEnemies[i]); }
+        }
+
     }
 
     void Start()
@@ -77,12 +96,34 @@ public class RayCastAi : MonoBehaviour
             case State.idle:
                 break;
             case State.searching:
+                LocateNearestEnemy();
                 Searching();
                 break;
             case State.chaseing:
                 InChase();
                 break;
         }
+    }
+
+    public void LocateNearestEnemy()
+    {
+        GameObject nearestEnemy = AllEnemiesList[0];
+        float distanceToEnemy = Vector2.Distance(ThisGameObject.transform.position, nearestEnemy.transform.position);
+
+        for (int i = 0; i < AllEnemiesList.Count; i++)
+        {
+            float distanceToCurrent = Vector2.Distance(ThisGameObject.transform.position, AllEnemiesList[i].transform.position);
+
+            if (distanceToCurrent < distanceToEnemy && Vector2.Distance(ThisGameObject.transform.position, nearestEnemy.transform.position) != 0)
+            {
+                nearestEnemy = AllEnemiesList[i];
+                distanceToEnemy = distanceToCurrent;
+            }
+        }
+
+        CloestEnemy = nearestEnemy.GetComponent<RayCastAi>();
+
+        EnemyInFront = Vector2.Distance(ThisGameObject.transform.position, CloestEnemy.transform.position) < EnemyDistanceDetection;
     }
 
     private void RayCastSearch()
@@ -103,6 +144,20 @@ public class RayCastAi : MonoBehaviour
 
     private void InChase()
     {
+        if (WallToLeft && WallToTop || WallToRight && WallToBot)
+        {
+            if (WallToLeft && WallToTop)
+            {
+                Turning = -1;
+            }
+            if (WallToRight && WallToBot)
+            {
+                Turning = 1;
+            }
+
+            this.transform.Rotate(0, 0, rotationSpeed * Turning);
+        }
+
         Rotate(PlayerLoc.transform.position);
         RB.linearVelocity = transform.right.normalized * Speed;
     }
@@ -123,8 +178,7 @@ public class RayCastAi : MonoBehaviour
         WallToBot = Physics2D.Raycast(transform.position, -transform.up + transform.up * RayCastConeSize, RaycastDistance, WallLayer);
 
 
-
-        if(WallToLeft && WallToRight)
+        if (WallToLeft && WallToRight)
         {
             AvoidWall();
         }
@@ -144,6 +198,42 @@ public class RayCastAi : MonoBehaviour
     {
         float TempSpeed = Speed;
 
+        if(EnemyInFront && !AvoidingWall && !HasRotatedAway)
+        {
+            HasRotatedAway = true;
+            int TempNum = Random.Range(1, 5);
+            //this.transform.rotation.SetLookRotation(CloestEnemy.transform.position);
+            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, -transform.rotation.z));
+            if(TempNum == 1)
+            {
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            if (TempNum == 2)
+            {
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            }
+            if (TempNum == 3)
+            {
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            }
+            if (TempNum == 4)
+            {
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+            }
+            /*
+            if (transform.rotation.z < 0)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
+            }
+            */
+            Invoke("RoatateAwayCoolDown", 3);
+            //this.transform.Rotate(0, 0, rotationSpeed * Turning);
+            return;
+        }
 
         if (AvoidingWall)
         {
@@ -180,6 +270,7 @@ public class RayCastAi : MonoBehaviour
             }
 
             this.transform.Rotate(0, 0, rotationSpeed * Turning);
+            return;
         }
         else
         {
@@ -200,6 +291,11 @@ public class RayCastAi : MonoBehaviour
                 this.transform.Rotate(0, 0, -rotationSpeed);
             }
         }*/
+    }
+
+    private void RoatateAwayCoolDown()
+    {
+        HasRotatedAway = false;
     }
 
     private int RNDDirection()
@@ -254,6 +350,16 @@ public class RayCastAi : MonoBehaviour
             {
                 InTrap = true;
                 InvokeRepeating("TrapDamage", 0, 1);
+            }
+        }
+
+        if(collision.tag == "Bullet")
+        {
+            Destroy(collision.gameObject);
+            HP -= 2;
+            if(HP <= 0)
+            {
+                Destroy(this.gameObject);
             }
         }
     }

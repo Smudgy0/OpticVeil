@@ -13,7 +13,11 @@ TagManager:
   - HidingSpot
   - Trap
   - TrapBase
+<<<<<<< Updated upstream
   - SpeedBoost
+=======
+  - EnemyAttack
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
