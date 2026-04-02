@@ -1,11 +1,33 @@
+using System.Collections;
 using UnityEngine;
+using System;
 
 public class SpeedBoost : MonoBehaviour
 {
     public Player_Movement playerMovement;
 
-    private void OnTriggerEnter2D()
+    //int TempSpeed = Speed
+    // in movement script use TempSpeed Instead of Speed
+
+    //playerMovement.int runSpeed * 3f;
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //playerMovement.int runSpeed * 3f;
+        if(collision.tag == "Player")
+        {
+            playerMovement.TempSpeed = playerMovement.runSpeed * 100;
+            Debug.Log("Speed increased");
+            StartCoroutine(Delay());
+            Debug.Log("delay ended");
+            playerMovement.TempSpeed = playerMovement.runSpeed;
+            Debug.Log("Speed decreased");
+        }
     }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(5);
+    }
+
 }

@@ -10,11 +10,13 @@ public class Player_Movement : MonoBehaviour
     private Rigidbody2D rb;
 
     public int runSpeed = 25;
+    public int TempSpeed;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        TempSpeed = runSpeed;
     }
 
     public void OnMove(InputAction.CallbackContext value)
@@ -24,7 +26,7 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movementDirection.x * runSpeed * Time.deltaTime, movementDirection.y * runSpeed * Time.deltaTime);
+        rb.linearVelocity = new Vector2(movementDirection.x * runSpeed * Time.deltaTime, movementDirection.y * TempSpeed * Time.deltaTime);
     }
 
     public void OnMousePosition(InputAction.CallbackContext value)
