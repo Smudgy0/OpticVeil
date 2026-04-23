@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,11 +33,17 @@ public class PlayerTrapTrigger : MonoBehaviour
         }
 
         ClosestTrap = nearestTrap.GetComponent<Trap>();
+        ClosestTrap.TriggerIcon.SetActive(true);
+
+        
     }
 
     public void TriggerTrap(InputAction.CallbackContext context)
     {
-        if (ClosestTrap == null) { return; }
+        if (ClosestTrap == null)
+        {
+            return; 
+        }
         Debug.Log("TriggerTrap");
         ClosestTrap.EngageTrap();
     }

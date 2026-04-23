@@ -18,8 +18,8 @@ public class SpeedBoost : MonoBehaviour
         {
             playerMovement.TempSpeed = playerMovement.runSpeed * 2;
             Debug.Log("Speed increased");
-            //make the sprite invisible
             StartCoroutine(Delay());
+            gameObject.SetActive(false);
         }
     }
 

@@ -3,11 +3,13 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     public GameObject TrapDamageCollider;
+    public GameObject TriggerIcon;
 
     private bool Active = false;   
     private void Awake()
     {
         TrapDamageCollider.SetActive(false);
+        TriggerIcon.SetActive(false);
     }
 
     public void EngageTrap()
