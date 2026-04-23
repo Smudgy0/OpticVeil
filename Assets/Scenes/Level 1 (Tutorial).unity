@@ -12827,7 +12827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2413150cfac40b6438841a891c4325d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collisions
-<<<<<<< Updated upstream
 --- !u!1 &1053601622
 GameObject:
   m_ObjectHideFlags: 0
@@ -13202,8 +13201,6 @@ MonoBehaviour:
   - {fileID: 964976455}
   - {fileID: 1917410848}
   ClosestTrap: {fileID: 0}
-=======
->>>>>>> Stashed changes
 --- !u!1 &1054251564
 GameObject:
   m_ObjectHideFlags: 0
@@ -13600,11 +13597,7 @@ Transform:
   m_GameObject: {fileID: 1353606831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< Updated upstream
   m_LocalPosition: {x: 10.41, y: 13.1, z: -10}
-=======
-  m_LocalPosition: {x: 1.4, y: -29.2, z: -10}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14127,11 +14120,7 @@ Transform:
   m_GameObject: {fileID: 1792776039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< Updated upstream
   m_LocalPosition: {x: 10.41, y: 13.1, z: -10}
-=======
-  m_LocalPosition: {x: 1.4, y: -29.2, z: -10}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
