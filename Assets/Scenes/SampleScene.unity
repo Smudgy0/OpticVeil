@@ -17604,9 +17604,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossMovement
   BossActive: 1
   MyTarget: {fileID: 0}
-  AttackPoints: []
-  MyBullet: {fileID: 0}
-  shootingDelay: 0
+  AttackPoints:
+  - {fileID: 860712828}
+  - {fileID: 646417048}
+  MyBullet: {fileID: 5918631603265714614, guid: 4d142b4c38f9d1442886c36c8fea5d6f, type: 3}
+  shootingDelay: 2
+  bossHp: 10
 --- !u!1001 &1618158561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18112,6 +18115,10 @@ PrefabInstance:
     - target: {fileID: 2657617809785584628, guid: ee1da6d1828bd7843ab5bcfe4933f208, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765193999886118208, guid: ee1da6d1828bd7843ab5bcfe4933f208, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6158412672834673841, guid: ee1da6d1828bd7843ab5bcfe4933f208, type: 3}
       propertyPath: m_Name

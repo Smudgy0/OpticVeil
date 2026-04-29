@@ -14,6 +14,8 @@ public class BossMovement : MonoBehaviour
 
     bool fired;
 
+    [SerializeField] private int bossHp = 30;
+
     private void Awake()
     {
         MyTarget = FindAnyObjectByType<Player_Movement>();
@@ -57,5 +59,19 @@ public class BossMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingDelay);
         fired = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Bullet")
+        {
+            Destroy(collision.gameObject);
+            bossHp -= 2;
+            if (bossHp <= 0)
+            {
+                Destroy(this.gameObject);
+                // add open and close boss arena
+            }
+        }
     }
 }
