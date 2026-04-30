@@ -9,6 +9,7 @@ public class PlayerTrapTrigger : MonoBehaviour
     public GameObject[] Alltraps;
     public Trap ClosestTrap;
 
+
     private void Awake()
     {
         Alltraps = GameObject.FindGameObjectsWithTag("TrapBase");
@@ -34,14 +35,13 @@ public class PlayerTrapTrigger : MonoBehaviour
 
         ClosestTrap = nearestTrap.GetComponent<Trap>();
         ClosestTrap.TriggerIcon.SetActive(true);
-
-        
     }
 
     public void TriggerTrap(InputAction.CallbackContext context)
     {
         if (ClosestTrap == null)
         {
+            ClosestTrap.TriggerIcon.SetActive(false);
             return; 
         }
         Debug.Log("TriggerTrap");

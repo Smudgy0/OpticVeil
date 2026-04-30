@@ -4,6 +4,8 @@ public class EnemyStatus : MonoBehaviour
 {
     public Player_Shooting PS;
     public int EnemyHP = 10;
+    public ObjectiveScript objective;
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +22,7 @@ public class EnemyStatus : MonoBehaviour
 
             if(this.EnemyHP <= 0)
             {
+                objective.KilledEnemy();
                 Destroy(this.gameObject);
             }
         }

@@ -3,6 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public class RayCastAi : MonoBehaviour
 {
     private Player_Movement PlayerLoc;
