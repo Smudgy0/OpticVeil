@@ -50,7 +50,7 @@ public class BossMovement : MonoBehaviour
     {
         fired = true;
         int FiringPoint = Random.Range(0, AttackPoints.Length);
-        GameObject bulletClone = Instantiate(MyBullet, AttackPoints[FiringPoint].position, transform.rotation);
+        GameObject bulletClone = Instantiate(MyBullet, AttackPoints[FiringPoint].position, AttackPoints[FiringPoint].rotation);
         Destroy(bulletClone, 5);
         StartCoroutine(FiringDelay());
     }

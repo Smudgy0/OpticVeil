@@ -85,6 +85,7 @@ public class Player_Movement : MonoBehaviour
 
         if (collision.tag == "EnemyAttack")
         {
+            Destroy(collision.gameObject);
             HP -= 2;
 
             if(HP <= 0)
