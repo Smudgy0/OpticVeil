@@ -20,7 +20,7 @@ public class ObjectiveScript : MonoBehaviour
         SideObjectiveText2.text = $"Defeat 10 enemies ({CurrentAmount}/{RequiredAmount2})";
 
         CurrentAmount = 0;
-
-
     }
+
+
 }
