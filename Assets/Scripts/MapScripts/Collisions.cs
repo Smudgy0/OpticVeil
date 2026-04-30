@@ -8,5 +8,10 @@ public class Collisions : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+
+        if (collision.tag == "BossBullet")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

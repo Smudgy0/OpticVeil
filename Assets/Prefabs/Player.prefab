@@ -323,6 +323,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9f475344-8c26-4e98-9e9f-7b1353bc3788
     m_ActionName: 'Player/Shoot[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2160802f-8fe2-4ab2-9174-d81ca0867b6e
+    m_ActionName: Player/JoyStickAxis
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -369,8 +373,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player_Movement
   HP: 10
   mousePos: {x: 0, y: 0}
-  runSpeed: 175
+  mousePosLastFrame: {x: 0, y: 0}
+  runSpeed: 325
   TempSpeed: 0
+  BossImpactForce: 10
 --- !u!114 &2271314764469666957
 MonoBehaviour:
   m_ObjectHideFlags: 0

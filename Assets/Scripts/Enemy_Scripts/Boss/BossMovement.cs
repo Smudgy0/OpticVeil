@@ -11,27 +11,73 @@ public class BossMovement : MonoBehaviour
     public GameObject MyBullet;
 
     public int shootingDelay;
+    public int ChargeForce;
 
-    bool fired;
+    public SpriteRenderer MySprite;
+
+    public Rigidbody2D MyRigidbody;
+
+    public bool fired;
+    public bool charging;
+
+    public float MaxSpeed;
+
+    public int RNDChoice;
+
+    bool canCharge = true;
 
     [SerializeField] private int bossHp = 30;
 
     private void Awake()
     {
+        InvokeRepeating("RNDNum", 1, 1);
+
+        charging = false;
+
+        MyRigidbody = GetComponent<Rigidbody2D>();
+        MySprite.color = Color.red;
         MyTarget = FindAnyObjectByType<Player_Movement>();
     }
 
     private void Update()
     {
-        int RNDChoice = Random.Range(1,10000);
+        if (!BossActive) { return; }
 
-        if(RNDChoice < 9800 && !fired)
+        if (fired || charging) { return;  }
+
+        if(RNDChoice < 70 && !fired && !charging)
         {
+            fired = true;
+            LookAtPlayer();
             RangedAttack();
         }
 
-        if(!BossActive) { return; }
-        LookAtPlayer();
+        if (RNDChoice >= 70 && !charging && canCharge)
+        {
+            charging = true;
+            LookAtPlayer();
+            Charge();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        MyRigidbody.linearVelocity = new Vector2(Mathf.Clamp(MyRigidbody.linearVelocity.x, -MaxSpeed, MaxSpeed), Mathf.Clamp(MyRigidbody.linearVelocity.y, -MaxSpeed, MaxSpeed));
+    }
+
+    public void RNDNum()
+    {
+        RNDChoice = Random.Range(1, 101);
+    }
+
+    public void Charge()
+    {
+        Debug.Log("Boss is Charging");
+        ChargeDelay();
+        MyRigidbody.AddForce(transform.right * ChargeForce, ForceMode2D.Impulse);
+
+
+        charging = false;
     }
 
     public void LookAtPlayer()
@@ -48,17 +94,39 @@ public class BossMovement : MonoBehaviour
 
     public void RangedAttack()
     {
-        fired = true;
         int FiringPoint = Random.Range(0, AttackPoints.Length);
         GameObject bulletClone = Instantiate(MyBullet, AttackPoints[FiringPoint].position, AttackPoints[FiringPoint].rotation);
         Destroy(bulletClone, 5);
-        StartCoroutine(FiringDelay());
+        Invoke("FiringDelay", shootingDelay);
     }
 
-    IEnumerator FiringDelay()
+    public void FiringDelay()
     {
-        yield return new WaitForSeconds(shootingDelay);
         fired = false;
+    }
+
+    IEnumerator ChargeDelay()
+    {
+        ColorChange();
+        yield return new WaitForSeconds(0.5f);
+        ColorChange();
+        yield return new WaitForSeconds(0.5f);
+        ColorChange();
+        yield return new WaitForSeconds(0.5f);
+        ColorChange();
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    public void ColorChange()
+    {
+        if(MySprite.color == Color.red)
+        {
+            MySprite.color = Color.blue;
+        }
+        else
+        {
+            MySprite.color = Color.red;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,5 +141,19 @@ public class BossMovement : MonoBehaviour
                 // add open and close boss arena
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canCharge = false;
+            Invoke("ChargeTimer", 3);
+        }
+    }
+
+    public void ChargeTimer()
+    {
+        canCharge = true;
     }
 }

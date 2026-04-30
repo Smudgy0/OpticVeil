@@ -17,7 +17,7 @@ public class PlayerTrapTrigger : MonoBehaviour
     void Update()
     {
         //ClosestTrap = FindAnyObjectByType<Trap>();
-
+        if(Alltraps.Length == 0) { return; }
         GameObject nearestTrap = Alltraps[0];
         float distanceToTrap = Vector2.Distance(Player.transform.position, nearestTrap.transform.position);
 

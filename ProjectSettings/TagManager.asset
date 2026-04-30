@@ -12,6 +12,8 @@ TagManager:
   - Trap
   - EnemyAttack
   - Keycard
+  - Boss
+  - BossBullet
   layers:
   - Default
   - TransparentFX
@@ -30,7 +32,7 @@ TagManager:
   - SpeedBoost
   - EnemyAttack
   - Player
-  - 
+  - Boss
   - 
   - 
   - 

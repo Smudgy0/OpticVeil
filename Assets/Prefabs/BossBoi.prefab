@@ -306,6 +306,74 @@ Transform:
   - {fileID: 17122681438666212}
   m_Father: {fileID: 5326090975789607282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6051337539467036099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3101675035721778418}
+  - component: {fileID: 6985105659725492741}
+  m_Layer: 17
+  m_Name: BossAttackHitBox
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3101675035721778418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051337539467036099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5326090975789607282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6985105659725492741
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051337539467036099}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.6
 --- !u!1 &7627387401556780096
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,9 +386,9 @@ GameObject:
   - component: {fileID: 3118265738973776359}
   - component: {fileID: 1090678818452875252}
   - component: {fileID: 5207019839280588458}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BossBoi
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,6 +410,7 @@ Transform:
   - {fileID: 332787649916270773}
   - {fileID: 150570377784621686}
   - {fileID: 7895958900069386422}
+  - {fileID: 3101675035721778418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &3118265738973776359
@@ -354,7 +423,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7ed83e5fe1148f642bbfaa715f1e9096, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -400,6 +469,13 @@ MonoBehaviour:
   - {fileID: 17122681438666212}
   MyBullet: {fileID: 5918631603265714614, guid: 4d142b4c38f9d1442886c36c8fea5d6f, type: 3}
   shootingDelay: 2
+  ChargeForce: 0
+  MySprite: {fileID: 1704147524040769323}
+  MyRigidbody: {fileID: 0}
+  fired: 0
+  charging: 0
+  MaxSpeed: 0
+  RNDChoice: 0
   bossHp: 10
 --- !u!50 &5207019839280588458
 Rigidbody2D:

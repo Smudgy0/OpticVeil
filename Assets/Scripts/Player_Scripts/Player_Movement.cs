@@ -19,6 +19,10 @@ public class Player_Movement : MonoBehaviour
 
     bool controllerEnabled;
 
+    public int BossImpactForce = 10;
+
+    bool takingDamage = false;
+
 
     private void Awake()
     {
@@ -76,6 +80,24 @@ public class Player_Movement : MonoBehaviour
         return;
     }
 
+    public void TakeDamage()
+    {
+        HP -= 2;
+
+        if (HP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void Impact()
+    {
+        HP -= 4;
+        rb.AddForce(transform.right * -5, ForceMode2D.Impulse);
+
+        rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocity.x, 0, 5), Mathf.Clamp(rb.linearVelocity.y, 0, 5));
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "HidingSpot")
@@ -85,10 +107,35 @@ public class Player_Movement : MonoBehaviour
 
         if (collision.tag == "EnemyAttack")
         {
-            Destroy(collision.gameObject);
-            HP -= 2;
+            if(!takingDamage)
+            {
+                takingDamage = true;
+                InvokeRepeating("TakeDamage", 1, 1);
+            }
 
             if(HP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        if(collision.tag == "Boss")
+        {
+            Invoke("Impact", 0.2f);
+
+            if (HP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        if (collision.tag == "BossBullet")
+        {
+            Destroy(collision.gameObject);
+            HP -= 3;
+            rb.AddForceX(BossImpactForce);
+
+            if (HP <= 0)
             {
                 Destroy(this.gameObject);
             }
@@ -97,6 +144,12 @@ public class Player_Movement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.tag == "EnemyAttack")
+        {
+            CancelInvoke();
+            takingDamage = false;
+        }
+
         if (collision.tag == "HidingSpot")
         {
             this.gameObject.layer = 9;
