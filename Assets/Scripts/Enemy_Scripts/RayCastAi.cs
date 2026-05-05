@@ -103,6 +103,7 @@ public class RayCastAi : MonoBehaviour
 
     public void LocateNearestEnemy()
     {
+        // checks the distance of the closest enemy to the enemy running this script and if they are too close they will pick a random direction to go in.
         GameObject nearestEnemy = AllEnemiesList[0];
         float distanceToEnemy = Vector2.Distance(ThisGameObject.transform.position, nearestEnemy.transform.position);
 
@@ -124,6 +125,7 @@ public class RayCastAi : MonoBehaviour
 
     private void RayCastSearch()
     {
+        // multiple checks ran in the ai to see if the player is visable and in range.
         BehindWall = Physics2D.Linecast(transform.position, PlayerLoc.transform.position, WallLayer);
         if(BehindWall) { 
             currentAction = State.searching;
@@ -140,6 +142,7 @@ public class RayCastAi : MonoBehaviour
 
     private void InChase()
     {
+        // if the ai has detected a player it will go straight ahead and try to avoid any walls.
         if (WallToLeft && WallToTop || WallToRight && WallToBot)
         {
             if (WallToLeft && WallToTop)
@@ -160,6 +163,7 @@ public class RayCastAi : MonoBehaviour
 
     private void Rotate(Vector2 LookAt)
     {
+        // rotate to look at the player
         Vector2 distance = LookAt - (Vector2)transform.position;
         float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -172,6 +176,7 @@ public class RayCastAi : MonoBehaviour
 
     private void Searching()
     {
+        // various raycasts to detect nearby walls
         WallToLeft = Physics2D.Raycast(transform.position, transform.right + transform.up * RayCastConeSize, RaycastDistance, WallLayer);
         WallToRight = Physics2D.Raycast(transform.position, transform.right - transform.up * RayCastConeSize, RaycastDistance, WallLayer);
 
@@ -210,6 +215,7 @@ public class RayCastAi : MonoBehaviour
     {
         float TempSpeed = Speed;
 
+        // if only another enemy is nearby both ai's with attempt to avoid each other
         if(EnemyInFront && !AvoidingWall && !HasRotatedAway)
         {
             HasRotatedAway = true;

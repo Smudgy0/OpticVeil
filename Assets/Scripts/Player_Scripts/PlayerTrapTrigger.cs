@@ -17,6 +17,8 @@ public class PlayerTrapTrigger : MonoBehaviour
 
     void Update()
     {
+
+        // always check for the closest trap
         //ClosestTrap = FindAnyObjectByType<Trap>();
         if(Alltraps.Length == 0) { return; }
         GameObject nearestTrap = Alltraps[0];
@@ -39,6 +41,7 @@ public class PlayerTrapTrigger : MonoBehaviour
 
     public void TriggerTrap(InputAction.CallbackContext context)
     {
+        // when the player inputs the interact key, it triggers the cloest trap
         if (ClosestTrap == null)
         {
             ClosestTrap.TriggerIcon.SetActive(false);

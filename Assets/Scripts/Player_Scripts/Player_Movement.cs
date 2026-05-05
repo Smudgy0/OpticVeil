@@ -32,16 +32,19 @@ public class Player_Movement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext value)
     {
+        // move in any direction based on WASD
         movementDirection = value.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
+        // move based on WASD or equivilent inputs
         rb.linearVelocity = new Vector2(movementDirection.x * TempSpeed * Time.deltaTime, movementDirection.y * TempSpeed * Time.deltaTime);
     }
 
     public void OnMousePosition(InputAction.CallbackContext value)
     {
+        // gets the mosues position to then rotate the player in that direction
         mousePos = value.ReadValue<Vector2>();
 
         if(mousePos != mousePosLastFrame)
@@ -62,6 +65,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Rotate(Vector2 mouseScreenPos)
     {
+        // looks towards the mouse's position
         Vector2 distance = mouseScreenPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -69,6 +73,7 @@ public class Player_Movement : MonoBehaviour
 
     public void ControllerRotate(InputAction.CallbackContext value)
     {
+        // alternate rotation script for controllers
         Debug.Log("Controller Axis");
         controllerEnabled = true;
 
@@ -82,6 +87,7 @@ public class Player_Movement : MonoBehaviour
 
     public void TakeDamage()
     {
+        // take damage from a bullet or normal attack
         HP -= 2;
 
         if (HP <= 0)
@@ -92,6 +98,7 @@ public class Player_Movement : MonoBehaviour
 
     public void Impact()
     {
+        // if hit by a enemy which rams (boss) take more damage and be knocked back
         HP -= 4;
         rb.AddForce(transform.right * -5, ForceMode2D.Impulse);
 
@@ -100,6 +107,7 @@ public class Player_Movement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // various conditions to change the players condition such as hiding or taking damage from different sources
         if(collision.tag == "HidingSpot")
         {
             this.gameObject.layer = 7;
@@ -144,6 +152,7 @@ public class Player_Movement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // once the player has left certain triggers cancel damage or set players condition back to normal
         if (collision.tag == "EnemyAttack")
         {
             CancelInvoke();
