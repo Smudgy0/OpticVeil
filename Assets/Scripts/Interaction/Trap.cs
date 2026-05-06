@@ -25,10 +25,4 @@ public class Trap : MonoBehaviour
         TrapDamageCollider.SetActive(false);
         Active = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

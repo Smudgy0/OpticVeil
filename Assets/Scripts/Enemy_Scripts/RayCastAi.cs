@@ -220,8 +220,6 @@ public class RayCastAi : MonoBehaviour
         {
             HasRotatedAway = true;
             int TempNum = Random.Range(1, 5);
-            //this.transform.rotation.SetLookRotation(CloestEnemy.transform.position);
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, -transform.rotation.z));
             if(TempNum == 1)
             {
                 this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -238,24 +236,13 @@ public class RayCastAi : MonoBehaviour
             {
                 this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
             }
-            /*
-            if (transform.rotation.z < 0)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
-            }
-            */
             Invoke("RoatateAwayCoolDown", 3);
-            //this.transform.Rotate(0, 0, rotationSpeed * Turning);
             return;
         }
 
-        if (AvoidingWall)
+        if (AvoidingWall) // if the enemy detects a wall in front it will attempt to avoid the wall.
         {
-            TempSpeed = Speed * AvoidingWallMult; // add var
+            TempSpeed = Speed * AvoidingWallMult; 
 
             if(WallToLeft && WallToRight && WallToTop && WallToBot || WallToLeft && WallToRight)
             {

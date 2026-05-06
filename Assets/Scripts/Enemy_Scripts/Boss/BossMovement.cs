@@ -26,6 +26,8 @@ public class BossMovement : MonoBehaviour
 
     bool canCharge = true;
 
+    public GameObject BossGate;
+
     [SerializeField] private int bossHp = 30;
 
     private void Awake()
@@ -145,6 +147,7 @@ public class BossMovement : MonoBehaviour
             bossHp -= 2;
             if (bossHp <= 0)
             {
+                if (BossGate != null) { DefeatBoss(); }
                 Destroy(this.gameObject);
                 // add open and close boss arena
             }
@@ -164,5 +167,10 @@ public class BossMovement : MonoBehaviour
     public void ChargeTimer()
     {
         canCharge = true;
+    }
+
+    public void DefeatBoss()
+    {
+        BossGate.SetActive(false);
     }
 }
