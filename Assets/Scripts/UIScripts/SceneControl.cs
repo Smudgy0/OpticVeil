@@ -19,4 +19,5 @@ public void NextScene1()
     {
         SceneManager.LoadScene("Main Menu");
     }
+    //All scenes labeled to easily tell which ones which.
 }
