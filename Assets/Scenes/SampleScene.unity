@@ -18691,8 +18691,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1058538295}
     - target: {fileID: 1090678818452875252, guid: a9d36620c1d1e9b43b571f2651bea874, type: 3}
+      propertyPath: MaxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090678818452875252, guid: a9d36620c1d1e9b43b571f2651bea874, type: 3}
       propertyPath: BossActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090678818452875252, guid: a9d36620c1d1e9b43b571f2651bea874, type: 3}
+      propertyPath: ChargeForce
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5326090975789607282, guid: a9d36620c1d1e9b43b571f2651bea874, type: 3}
       propertyPath: m_LocalPosition.x
