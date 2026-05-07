@@ -37,7 +37,7 @@ public class BossMovement : MonoBehaviour
         charging = false;
 
         MyRigidbody = GetComponent<Rigidbody2D>();
-        MySprite.color = Color.red;
+        //MySprite.color = Color.red;
         MyTarget = FindAnyObjectByType<Player_Movement>();
     }
 
@@ -128,6 +128,7 @@ public class BossMovement : MonoBehaviour
 
     public void ColorChange()
     {
+        /*
         if(MySprite.color == Color.red)
         {
             MySprite.color = Color.blue;
@@ -136,6 +137,7 @@ public class BossMovement : MonoBehaviour
         {
             MySprite.color = Color.red;
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
