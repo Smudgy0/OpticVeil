@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +7,7 @@ public class PlayerTrapTrigger : MonoBehaviour
     public GameObject[] Alltraps;
     public Trap ClosestTrap;
 
+    public bool LevelHasTraps = true;
 
     private void Awake()
     {
@@ -41,6 +40,8 @@ public class PlayerTrapTrigger : MonoBehaviour
 
     public void TriggerTrap(InputAction.CallbackContext context)
     {
+        if (!LevelHasTraps) return;
+
         // when the player inputs the interact key, it triggers the cloest trap
         if (ClosestTrap == null)
         {

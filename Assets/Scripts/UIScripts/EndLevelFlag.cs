@@ -4,7 +4,7 @@ using UnityEngine;
 public class EndLevelFlag : MonoBehaviour, IInteractable
 {
     public GameObject endLevelScreen;
-    bool IsCollected;
+    public bool IsCollected;
     public bool CanInteract()
     {
         return !IsCollected;

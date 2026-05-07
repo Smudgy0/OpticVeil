@@ -295,7 +295,7 @@ MonoBehaviour:
   MaxSpeed: 0
   RNDChoice: 0
   BossGate: {fileID: 0}
-  bossHp: 10
+  bossHp: 24
 --- !u!50 &5207019839280588458
 Rigidbody2D:
   serializedVersion: 5
