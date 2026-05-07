@@ -6,5 +6,6 @@ public class QuitButtonScript : MonoBehaviour
     {
     
         Application.Quit();
+        //quits game.
     }
 }

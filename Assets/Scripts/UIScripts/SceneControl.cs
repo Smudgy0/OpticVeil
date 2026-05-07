@@ -19,5 +19,5 @@ public void NextScene1()
     {
         SceneManager.LoadScene("Main Menu");
     }
-    //All scenes labeled to easily tell which ones which.
+    //All scenes labeled to easily tell which ones which. Useful for the Level select and going to specific levels
 }

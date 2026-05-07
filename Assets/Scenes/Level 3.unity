@@ -54455,11 +54455,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1475348727018844527, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1475348727018844527, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -2.88
       objectReference: {fileID: 0}
     - target: {fileID: 1475348727018844527, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54496,6 +54496,14 @@ PrefabInstance:
     - target: {fileID: 2872642621147324829, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
       propertyPath: m_Name
       value: End of level
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872642621147324829, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338009218371118615, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8685466788984056542, guid: 3f8deadc5ed5c844f88bd87ef57a684c, type: 3}
       propertyPath: endLevelScreen

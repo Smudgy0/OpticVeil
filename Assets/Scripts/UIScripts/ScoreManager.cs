@@ -10,4 +10,5 @@ public class ScoreManager : MonoBehaviour
         scoreAmount++;
         scoreText.text = "Score: " + scoreAmount.ToString();
     }
+    //shows score updating to score value
 }

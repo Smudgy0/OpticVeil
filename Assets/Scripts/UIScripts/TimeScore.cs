@@ -11,7 +11,7 @@ public class TimeScore : MonoBehaviour
     {
         canDecrease = true;
     }
-
+    //allows score to decrease. can be turned off later
 
 
     private void Update()
