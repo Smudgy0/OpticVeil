@@ -20,4 +20,10 @@ public void NextScene1()
         SceneManager.LoadScene("Main Menu");
     }
     //All scenes labeled to easily tell which ones which. Useful for the Level select and going to specific levels
+    public void FixTime()
+    {
+        Time.timeScale = 1.0f;
+        //Unpauses the game when button is clicked. fixing the "permamently paused game" bug
+    }
+
 }
