@@ -52,6 +52,10 @@ public class RayCastAi : MonoBehaviour
 
     private int directionNum;
 
+    private float distanceToCurrent;
+
+    public ObjectiveScript objective;
+
     [SerializeField] public enum State
     {
         idle,
@@ -105,17 +109,33 @@ public class RayCastAi : MonoBehaviour
     {
         // checks the distance of the closest enemy to the enemy running this script and if they are too close they will pick a random direction to go in.
         GameObject nearestEnemy = AllEnemiesList[0];
+
+        if (nearestEnemy == null) {
+            Destroy(AllEnemiesList[0]);
+
+            nearestEnemy = AllEnemiesList[0];
+        }
+
+        if(nearestEnemy == null) { return; }
         float distanceToEnemy = Vector2.Distance(ThisGameObject.transform.position, nearestEnemy.transform.position);
 
         for (int i = 0; i < AllEnemiesList.Count; i++)
         {
-            float distanceToCurrent = Vector2.Distance(ThisGameObject.transform.position, AllEnemiesList[i].transform.position);
+            if(AllEnemiesList[0] == null)
+            {
+                Destroy(AllEnemiesList[0]);
+                distanceToCurrent = Vector2.Distance(ThisGameObject.transform.position, AllEnemiesList[i].transform.position);
+            }
+            else
+            {
+            }
 
             if (distanceToCurrent < distanceToEnemy && Vector2.Distance(ThisGameObject.transform.position, nearestEnemy.transform.position) != 0)
             {
                 nearestEnemy = AllEnemiesList[i];
                 distanceToEnemy = distanceToCurrent;
             }
+
         }
 
         CloestEnemy = nearestEnemy.GetComponent<RayCastAi>();
@@ -364,6 +384,7 @@ public class RayCastAi : MonoBehaviour
             HP -= 2;
             if(HP <= 0)
             {
+                objective.KilledEnemy();
                 Destroy(this.gameObject);
             }
         }
@@ -386,6 +407,7 @@ public class RayCastAi : MonoBehaviour
         HP -= 2;
         if(HP <= 0)
         {
+            objective.KilledEnemy();
             Destroy(this.gameObject);
         }
     }

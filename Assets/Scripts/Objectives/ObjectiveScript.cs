@@ -10,21 +10,24 @@ public class ObjectiveScript : MonoBehaviour
     public Text SideObjectiveText1;
     public Text SideObjectiveText2;
 
-    public float currentAmount1;
-    public float currentAmount2;
-    public float requiredAmount1;
-    public float requiredAmount2;
+    public int currentAmount1;
+    public int currentAmount2;
+    public int requiredAmount1;
+    public int requiredAmount2;
 
-    void Start()
+    private void Start()
     {
-        MainObjectiveText.text = "Reach the end of the level";
-        SideObjectiveText1.text = $"Defeat 5 enemies ({currentAmount1}/{requiredAmount1})";
-        SideObjectiveText2.text = $"Defeat 10 enemies ({currentAmount2}/{requiredAmount2})";
-
         currentAmount1 = 0;
         currentAmount2 = 0;
         requiredAmount1 = 5;
         requiredAmount2 = 10;
+    }
+
+    private void Update()
+    {
+        MainObjectiveText.text = "Reach the end of the level";
+        SideObjectiveText1.text = $"Defeat 5 enemies ({currentAmount1}/{requiredAmount1})";
+        SideObjectiveText2.text = $"Defeat 10 enemies ({currentAmount2}/{requiredAmount2})";
     }
 
     public void KilledEnemy()

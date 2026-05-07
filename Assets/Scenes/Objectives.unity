@@ -363,6 +363,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.930002
@@ -525,6 +529,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.109995
@@ -585,9 +593,9 @@ GameObject:
   - component: {fileID: 637127513}
   - component: {fileID: 637127512}
   - component: {fileID: 637127511}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -722,9 +730,9 @@ GameObject:
   - component: {fileID: 818287794}
   - component: {fileID: 818287793}
   - component: {fileID: 818287792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -931,9 +939,9 @@ GameObject:
   - component: {fileID: 1304931221}
   - component: {fileID: 1304931220}
   - component: {fileID: 1304931219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1065,6 +1073,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.609995
@@ -1122,6 +1134,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.070002
@@ -1179,6 +1195,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.960001
@@ -1260,7 +1280,8 @@ MonoBehaviour:
   MainObjectiveText: {fileID: 271856911}
   SideObjectiveText1: {fileID: 1658709226}
   SideObjectiveText2: {fileID: 430452245}
-  currentAmount: 0
+  currentAmount1: 0
+  currentAmount2: 0
   requiredAmount1: 5
   requiredAmount2: 10
 --- !u!4 &1618398277
@@ -1290,9 +1311,9 @@ GameObject:
   - component: {fileID: 1621946267}
   - component: {fileID: 1621946266}
   - component: {fileID: 1621946265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1424,6 +1445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133932127985011065, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
+      propertyPath: objective
+      value: 
+      objectReference: {fileID: 1618398276}
     - target: {fileID: 2160611524929269307, guid: 5f9e8ce5bbbcebb4bb6e74a190e55dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.49
