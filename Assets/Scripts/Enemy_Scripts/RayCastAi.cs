@@ -384,7 +384,7 @@ public class RayCastAi : MonoBehaviour
             HP -= 2;
             if(HP <= 0)
             {
-                objective.KilledEnemy();
+                if (objective != null) { objective.KilledEnemy(); }
                 Destroy(this.gameObject);
             }
         }
@@ -407,7 +407,7 @@ public class RayCastAi : MonoBehaviour
         HP -= 2;
         if(HP <= 0)
         {
-            objective.KilledEnemy();
+            if(objective != null) { objective.KilledEnemy(); }
             Destroy(this.gameObject);
         }
     }
