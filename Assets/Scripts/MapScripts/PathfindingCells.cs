@@ -61,6 +61,7 @@ public class PathfindingCells : MonoBehaviour
 
     public void ClearPath()
     {
+        // clear all lists
         finalPath.Clear();
         cellsToSearch.Clear();
         searchedCells.Clear();
@@ -83,7 +84,7 @@ public class PathfindingCells : MonoBehaviour
 
     public void GenerateGrid()
     {
-
+        // generate a new grid
         cells = new Dictionary<Vector2, Cell>();
 
         for (float x = 0; x < gridWidth; x += cellWidth)
@@ -127,6 +128,7 @@ public class PathfindingCells : MonoBehaviour
 
     public void FindPath(Vector2 startPos, Vector2 endPos)
     {
+        // find path uses the tile costs to find the cheapest path
         searchedCells = new List<Vector2>();
         cellsToSearch = new List<Vector2> { startPos };
         finalPath = new List<Vector2>();
